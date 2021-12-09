@@ -1,7 +1,10 @@
+using Logiwa_CaseStudy.Models;
+using Logiwa_CaseStudy.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -23,7 +26,7 @@ namespace Logiwa_CaseStudy
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+   
         public void ConfigureServices(IServiceCollection services)
         {
 
@@ -32,9 +35,11 @@ namespace Logiwa_CaseStudy
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Logiwa_CaseStudy", Version = "v1" });
             });
+            services.AddDbContext<ApplicationDBContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("SqlConnection"))); //veritabaný tanýmlama
+            services.AddScoped<IProductService, ProductService>(); 
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+  
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
