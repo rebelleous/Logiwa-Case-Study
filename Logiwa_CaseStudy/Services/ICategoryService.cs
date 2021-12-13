@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace Logiwa_CaseStudy.Services
 {
-    public interface IProductService
+    public interface ICategoryService
     {
-        List<Product> ListAllProducts();
-        Task<Product> ListProductCategoryByID(int id);
-
-       
+        List<Category> ListAllCategories();
+        
     }
 }
