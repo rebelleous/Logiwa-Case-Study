@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Logiwa_CaseStudy.Models
 {
-    public class CategoryCreate
+    public class CreateCategory
     {
         public string Name { get; set; }
         public int MinStockQuantity { get; set; }

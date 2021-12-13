@@ -36,6 +36,7 @@ namespace Logiwa_CaseStudy
 
             services.AddMvc().AddFluentValidation(fvc => fvc.RegisterValidatorsFromAssemblyContaining<Startup>()); // friend validation inj.
             services.AddTransient<IValidator<Product>, ProductValidator>();
+            services.AddAutoMapper(typeof(Startup));
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

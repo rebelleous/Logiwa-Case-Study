@@ -25,9 +25,9 @@ namespace Logiwa_CaseStudy.Helpers
                     new List<Category>()
                     {
                         new Category(){Name="Elektronik",MinStockQuantity=5},
-                        new Category(){Name="Kırtasiye",MinStockQuantity=10},
-                        new Category(){Name="Ofis",MinStockQuantity=15},
-                        new Category(){Name="Oyuncak",MinStockQuantity=20},
+                        new Category(){Name="Moda",MinStockQuantity=10},
+                        new Category(){Name="Spor",MinStockQuantity=15},
+                        new Category(){Name="Otomotiv",MinStockQuantity=20},
 
                     }
                     );
@@ -38,10 +38,10 @@ namespace Logiwa_CaseStudy.Helpers
                 context.Set<Product>().AddRange(
                 new List<Product>()
                 {
-                         new Product() {Description="Hızını anlatmaya kelimeler yetişemez.Bir akıllı telefondaki en hızlı çip olan A14 Bionic.",StockQuantity=200,CategoryID=1,Title="Iphone 12 64 GB"},
-                         new Product() {Description="Yazı yazarken ve çizim yaparken yorulmamanız için altıgen olarak tasarlanan Rotring 500 versatil kalem serisi orijinal ve birinci kalite plastik gövdeye ve maksimum tutuşu sağlayacak metal tutma alanına sahiptir.",StockQuantity=150,CategoryID=2,Title="Rotring 500 Siyah Versatil Kalem"},
-                         new Product() {Description="Thunder Pro Çalışma Sandalyesi, en çok satan ofis sandalyesi kategorisinde ilk sırada gelmektedir.",StockQuantity=50,CategoryID=3,Title="Seduna Thunder Pro Siyah"},
-                         new Product() {Description="Kutu Oyunu Tabu XL Özellikleri Oyun partilerinin vazgeçilmezi Tabu XL sizlerle! Tabu XL'da tam 4 farklı anlatım şekli var.",StockQuantity=100,CategoryID=4,Title="Kutu Oyunu Tabu XL"}
+                         new Product() {Description="Karşınızda şimdiye kadarki en hızlı ve en güçlü Xbox olan Xbox Series X.",StockQuantity=40,CategoryID=1,Title="Microsoft Xbox Series X Oyun Konsolu Siyah 1 TB"},
+                         new Product() {Description="Ürün, genç kullanıcıların günlük kullanımı için tasarlanan ikonik modeller arasında yer alıyor.",StockQuantity=100,CategoryID=2,Title="Nike Air Force 1 Beyaz Spor Ayakkabı"},
+                         new Product() {Description="Optimum performans ve orijinal gibi dokunma hissi için yüksek kaliteli kompozit malzeme. Nike N.Fi.04.222.09 All-Field 3.0 Official Amerikan Futbol Topu",StockQuantity=150,CategoryID=3,Title="Nike Official Amerikan Futbolu Topu"},
+                         new Product() {Description=" Süper fiber laminat (Fiberglass) dış kabuk, ECE22-05 ve SNELLM2010 sertifikalarına ve entegre havalandırmaya sahip.",StockQuantity=75,CategoryID=4,Title="Arai Chaser-X Shaped Red Kapalı Motosiklet Kaskı"}
                 }
                 );
             }

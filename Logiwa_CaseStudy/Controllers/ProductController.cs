@@ -1,4 +1,5 @@
-﻿using Logiwa_CaseStudy.Models;
+﻿using AutoMapper;
+using Logiwa_CaseStudy.Models;
 using Logiwa_CaseStudy.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -15,11 +16,15 @@ namespace Logiwa_CaseStudy.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IProductService _productService;
+        private IMapper _mapper;
 
-        public ProductController(IProductService productService)
+        public ProductController(IProductService productService, IMapper mapper)
         {
             _productService = productService;
+            _mapper = mapper;
         }
+
+       
 
         // GET: api/<ProductsController>
         [HttpGet("[action]")] // [HttpGet] birden fazla Get fonk. olduğunda action ismini veriyor.
@@ -42,7 +47,26 @@ namespace Logiwa_CaseStudy.Controllers
             return _productService.SearchByStockRange(minVal, maxVal);
         }
 
+        [HttpPost]
+        public IActionResult Create(CreateProduct model)
+        {
+            _productService.Create(model);
+            return Ok(new { mesage = "Product created." });
+        }
+
+        [HttpPut]
+        public IActionResult Update(int id, UpdateProduct model)
+        {
+            _productService.Update(id, model);
+            return Ok(new { message = "User updated." });
+        }
 
 
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _productService.Delete(id);
+            return Ok(new { message = "User deleted" });
+        }
     }
 }
