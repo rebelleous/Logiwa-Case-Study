@@ -22,13 +22,27 @@ namespace Logiwa_CaseStudy.Controllers
         }
 
         // GET: api/<ProductsController>
-        [HttpGet]
+        [HttpGet("[action]")] // [HttpGet] birden fazla Get fonk. olduğunda action ismini veriyor.
+
         public IEnumerable<Product> Get()
         {
             return _productService.ListAllProducts();
         }
-        
 
-       
+
+        [HttpGet("[action]")]
+        public IEnumerable<Product> GetByCriteria(string title = "", string description = "", string categoryName = "") // bu fonksiyonlara da Get verip override ile aynı isime sahiplendirebilirdim.
+        {
+            return _productService.SearchByCriteria(title, description, categoryName);
+        }
+
+        [HttpGet("[action]")]
+        public IEnumerable<Product> GetByQuantity(int minVal = 1, int maxVal = 200)
+        {
+            return _productService.SearchByStockRange(minVal, maxVal);
+        }
+
+
+
     }
 }

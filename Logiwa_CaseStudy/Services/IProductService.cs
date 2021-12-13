@@ -9,8 +9,10 @@ namespace Logiwa_CaseStudy.Services
     public interface IProductService
     {
         List<Product> ListAllProducts();
-        Task<Product> ListProductCategoryByID(int id);
 
+        List<Product> SearchByCriteria(string title, string description, string categoryName); // entity framework search, bycriteria, filtering
+
+        List<Product> SearchByStockRange(int minVal=1, int maxVal=200);
        
     }
 }

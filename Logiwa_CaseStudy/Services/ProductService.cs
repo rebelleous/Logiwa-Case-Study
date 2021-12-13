@@ -1,4 +1,5 @@
 ﻿using Logiwa_CaseStudy.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,9 +22,15 @@ namespace Logiwa_CaseStudy.Services
             return _context.Products.ToList();
         }
 
-        public Task<Product> ListProductCategoryByID(int id)
+        public List<Product> SearchByCriteria(string title, string description, string categoryName)
         {
-            throw new NotImplementedException();
+            
+            return _context.Products.Where(m => m.Title.ToLower().Contains(title.ToLower()) && m.Description.ToLower().Contains(description.ToLower()) && m.category.Name.ToLower().Contains(categoryName.ToLower())).ToList();
+        }
+
+        public List<Product> SearchByStockRange(int minVal = 1, int maxVal = 200)
+        {
+            return _context.Products.Where(m => m.StockQuantity >= minVal && m.StockQuantity <= maxVal).ToList();
         }
     }
 }

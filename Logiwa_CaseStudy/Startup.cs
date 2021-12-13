@@ -1,6 +1,8 @@
+using FluentValidation;
 using FluentValidation.AspNetCore;
 using Logiwa_CaseStudy.Helpers;
 using Logiwa_CaseStudy.Models;
+using Logiwa_CaseStudy.Models.Validator;
 using Logiwa_CaseStudy.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -33,6 +35,7 @@ namespace Logiwa_CaseStudy
         {
 
             services.AddMvc().AddFluentValidation(fvc => fvc.RegisterValidatorsFromAssemblyContaining<Startup>()); // friend validation inj.
+            services.AddTransient<IValidator<Product>, ProductValidator>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
