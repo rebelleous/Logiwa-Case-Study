@@ -1,3 +1,5 @@
+using FluentValidation.AspNetCore;
+using Logiwa_CaseStudy.Helpers;
 using Logiwa_CaseStudy.Models;
 using Logiwa_CaseStudy.Services;
 using Microsoft.AspNetCore.Builder;
@@ -30,6 +32,7 @@ namespace Logiwa_CaseStudy
         public void ConfigureServices(IServiceCollection services)
         {
 
+            services.AddMvc().AddFluentValidation(fvc => fvc.RegisterValidatorsFromAssemblyContaining<Startup>()); // friend validation inj.
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -45,10 +48,11 @@ namespace Logiwa_CaseStudy
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Logiwa_CaseStudy v1"));
+               
             }
-
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Logiwa_CaseStudy v1"));
+            SeedingData.Seed(app);
             app.UseHttpsRedirection();
 
             app.UseRouting();

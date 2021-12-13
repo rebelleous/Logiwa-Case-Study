@@ -8,11 +8,22 @@ namespace Logiwa_CaseStudy.Services
 {
     public class ProductService : IProductService
     {
-        public List<Product> ListAllProducts()
+        private readonly ApplicationDBContext _context;
+        public ProductService(ApplicationDBContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
 
 
+        public List<Product> ListAllProducts()
+        {
+
+            return _context.Products.ToList();
+        }
+
+        public Task<Product> ListProductCategoryByID(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
