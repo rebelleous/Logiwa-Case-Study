@@ -34,7 +34,7 @@ namespace Logiwa_CaseStudy
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddMvc().AddFluentValidation(fvc => fvc.RegisterValidatorsFromAssemblyContaining<Startup>()); // friend validation inj.
+            services.AddMvc().AddFluentValidation(fvc => fvc.RegisterValidatorsFromAssemblyContaining<Startup>()); // fluent validation inj.
             services.AddTransient<IValidator<Product>, ProductValidator>();
             services.AddAutoMapper(typeof(Startup));
             services.AddControllers();
@@ -43,7 +43,9 @@ namespace Logiwa_CaseStudy
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Logiwa_CaseStudy", Version = "v1" });
             });
             services.AddDbContext<ApplicationDBContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("SqlConnection"))); //veritabaný tanýmlama
-            services.AddScoped<IProductService, ProductService>(); 
+            services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<ICategoryService, CategoryService>();
+            
         }
 
   
@@ -56,7 +58,8 @@ namespace Logiwa_CaseStudy
             }
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Logiwa_CaseStudy v1"));
-            SeedingData.Seed(app);
+
+            SeedingData.Seed(app); // Seed the data
             app.UseHttpsRedirection();
 
             app.UseRouting();
