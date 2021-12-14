@@ -49,11 +49,9 @@ namespace Logiwa_CaseStudy.Services
 
         public void Update(int id, CrUpProduct model)
         {
-
             var product =_mapper.Map<Product>(model);
             _context.Products.Update(product);
             _context.SaveChanges();
-
         }
 
         public void Delete(int id)

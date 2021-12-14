@@ -44,21 +44,24 @@ namespace Logiwa_CaseStudy.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(CrUpProduct model) // Create function w HttpPost
+        /// Create function w HttpPost
+        public IActionResult Create(CrUpProduct model) 
         {
             _productService.Create(model);
             return Ok(new { mesage = "Product created." });
         }
 
         [HttpPut]
-        public IActionResult Update(int id, CrUpProduct model) // Update function w HttpPut
+        /// Update function w HttpPut
+        public IActionResult Update(int id, CrUpProduct model) 
         {
             _productService.Update(id, model);
             return Ok(new { message = "Product updated." });
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id) // Delete function w HttpDelete
+        /// Delete function w HttpDelete
+        public IActionResult Delete(int id) 
         {
             _productService.Delete(id);
             return Ok(new { message = "Product deleted." });

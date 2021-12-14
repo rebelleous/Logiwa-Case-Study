@@ -13,5 +13,7 @@ namespace Logiwa_CaseStudy.Services
         void Create(CreateCategory model);
 
         void Update(int id, CreateCategory model);
+
+        void Delete(int id);
     }
 }

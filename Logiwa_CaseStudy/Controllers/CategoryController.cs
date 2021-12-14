@@ -1,4 +1,5 @@
-﻿using Logiwa_CaseStudy.Models;
+﻿using AutoMapper;
+using Logiwa_CaseStudy.Models;
 using Logiwa_CaseStudy.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -14,10 +15,13 @@ namespace Logiwa_CaseStudy.Controllers
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryService _categoryService;
+        private IMapper _mapper;
 
-        public CategoryController(ICategoryService categoryService)
+        public CategoryController(ICategoryService categoryService, IMapper mapper)
         {
             _categoryService = categoryService;
+            _mapper = mapper;
+            
         }
         // GET: api/<CategoryController>
         [HttpGet]
@@ -31,6 +35,22 @@ namespace Logiwa_CaseStudy.Controllers
         {
             _categoryService.Create(model);
             return Ok(new { mesage = "Category created." });
+        }
+
+        [HttpPut]
+        /// Update function w HttpPut
+        public IActionResult Update(int id, CreateCategory model)
+        {
+            _categoryService.Update(id, model);
+            return Ok(new { message = "Category updated." });
+        }
+
+        [HttpDelete("{id}")]
+        /// Delete function w HttpDelete
+        public IActionResult Delete(int id)
+        {
+            _categoryService.Delete(id);
+            return Ok(new { message = "Category deleted." });
         }
 
 

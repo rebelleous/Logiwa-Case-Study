@@ -25,6 +25,13 @@ namespace Logiwa_CaseStudy.Services
             _context.SaveChanges();
         }
 
+        public void Delete(int id)
+        {
+            var category = getCategory(id);
+            _context.Categories.Remove(category);
+            _context.SaveChanges();
+        }
+
         public List<Category> ListAllCategories()
         {
             return _context.Categories.ToList();
@@ -32,7 +39,16 @@ namespace Logiwa_CaseStudy.Services
 
         public void Update(int id, CreateCategory model)
         {
-            throw new NotImplementedException();
+            var category = _mapper.Map<Category>(model);
+            _context.Categories.Update(category);
+            _context.SaveChanges();
+        }
+
+        private Category getCategory(int id)
+        {
+            var category = _context.Categories.Find(id);
+            if (category == null) throw new KeyNotFoundException("Category not found");
+            return category;
         }
     }
 }

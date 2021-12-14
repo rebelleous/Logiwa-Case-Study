@@ -19,8 +19,8 @@ namespace Logiwa_CaseStudy.Models.Validator // işin algoritması / kuralları b
 
             RuleFor(x => x) //Product quantity check
                 .Must(x=> FindCategoryMinQuantity(CategoryID:x.CategoryID,quantity:x.StockQuantity))
-                .WithMessage(m => $"Ürün stok sayısı, kategorinin belirlediğinden düşük. Stok sayısı adet veya daha fazla olmalı"); // rule set
-
+                .WithMessage(m => $"Product's Stock Quantity is less than Category's Minimum Stock Quantity."); // rule set
+            
 
             bool IsCategoryExist(int CategoryID)
             {
