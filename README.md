@@ -18,6 +18,7 @@ It has been designed and coded in accordance with the Domain Driven Design struc
 
 ## Endpoints
 **Product Controller**
+
 ![Product Controller](https://i.ibb.co/zs5Fq2v/resim-2021-12-14-224210.png)
 
 - /api/product/ [HttpGet]
@@ -41,6 +42,7 @@ It has been designed and coded in accordance with the Domain Driven Design struc
 <br>
 
 **Category Controller**
+
 ![CategoryController](https://i.ibb.co/LtfsYJg/resim-2021-12-15-010926.png)
 
 - /api/category/ [HttpGet]
