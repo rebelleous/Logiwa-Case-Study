@@ -68,7 +68,7 @@ namespace Logiwa_CaseStudy
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapControllers(); // Map controllerda end point belirtimi.
             });
         }
     }

@@ -43,8 +43,8 @@ namespace Logiwa_CaseStudy.Services
         public void Create(CrUpProduct model)
         {
             var product = _mapper.Map<Product>(model);
-            _context.Products.Add(product);
-            _context.SaveChanges();
+            _context.Products.Add(product); // Flag for adding
+            _context.SaveChanges(); //Controller isteği karşılar sonra middleware a bakar sonrası servise düşer. Servisten veritabanına flag koyar. Veritabanı bunu uygular ve geri döner.
         }
 
         public void Update(int id, CrUpProduct model)
