@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Logiwa_CaseStudy.Controllers
 {
@@ -25,19 +24,15 @@ namespace Logiwa_CaseStudy.Controllers
             _mapper = mapper;
         }
 
-       
-
-        
+              
         [HttpGet("[action]")] // [HttpGet] birden fazla Get fonk. olduğunda action ismini veriyor.
-
         public IEnumerable<GetProductDto> Get()
         {
             return _productService.ListAllProducts();
         }
 
-
         [HttpGet("[action]")]
-        public IEnumerable<Product> GetByCriteria(string title = "", string description = "", string categoryName = "") // bu fonksiyonlara da Get verip override ile aynı isime sahiplendirebilirdim.
+        public IEnumerable<Product> GetByCriteria(string title = "", string description = "", string categoryName = "") // Could have named the same function name with override.
         {
             return _productService.SearchByCriteria(title, description, categoryName);
         }
@@ -45,26 +40,25 @@ namespace Logiwa_CaseStudy.Controllers
         [HttpGet("[action]")]
         public IEnumerable<Product> GetByQuantity(int minVal = 1, int maxVal = 200) // default parameter.
         {
-            return _productService.SearchByStockRange(minVal, maxVal);
+            return _productService.SearchByStockRange(minVal, maxVal); // Search by stock range
         }
 
         [HttpPost]
-        public IActionResult Create(CrUpProduct model)
+        public IActionResult Create(CrUpProduct model) // Create function w HttpPost
         {
             _productService.Create(model);
             return Ok(new { mesage = "Product created." });
         }
 
         [HttpPut]
-        public IActionResult Update(int id, CrUpProduct model)
+        public IActionResult Update(int id, CrUpProduct model) // Update function w HttpPut
         {
             _productService.Update(id, model);
             return Ok(new { message = "Product updated." });
         }
 
-
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(int id) // Delete function w HttpDelete
         {
             _productService.Delete(id);
             return Ok(new { message = "Product deleted." });

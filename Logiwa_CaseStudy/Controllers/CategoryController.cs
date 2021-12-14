@@ -7,7 +7,6 @@ using System.Linq;
 using System.Threading.Tasks;
 
 
-
 namespace Logiwa_CaseStudy.Controllers
 {
     [Route("api/[controller]")]

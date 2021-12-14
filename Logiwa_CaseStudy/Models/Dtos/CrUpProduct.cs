@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Logiwa_CaseStudy.Models
 {
-    public class CrUpProduct
+    public class CrUpProduct // Info's asked when Create/Update Product
     {
         public string Description { get; set; }
         public string Title { get; set; }

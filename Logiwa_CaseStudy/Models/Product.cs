@@ -14,8 +14,8 @@ namespace Logiwa_CaseStudy.Models
 
         public string Description { get; set; }
 
-        [NotNull]
-        [MaxLength(200)]
+        //[NotNull]
+        //[MaxLength(200)]
         public string Title { get; set; }
 
         public int StockQuantity { get; set; }
