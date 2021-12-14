@@ -41,7 +41,7 @@ It has been designed and coded in accordance with the Domain Driven Design struc
 <br>
 
 **Category Controller**
-![CategoryController](https://i.ibb.co/GTNdGFY/resim-2021-12-14-225153.png)
+![CategoryController](https://i.ibb.co/LtfsYJg/resim-2021-12-15-010926.png)
 
 - /api/category/ [HttpGet]
 > This HttpGet action lists all Categories.
