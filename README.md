@@ -48,7 +48,12 @@ It has been designed and coded in accordance with the Domain Driven Design struc
 
 - /api/category/ [HttpPost]
 > This HttpPost action creates category category.
-- Update and Delete Endpoints will be added. (To Do)
+
+- /api/category/ [HttpPut]
+> This HttpPut action updates the category that chosen by Category's ID.
+
+- /api/category/{id} [HttpDelete]
+> This HttpDelete deletes the category that chosen by Category's ID.
 
 ## Seed Data
 
@@ -58,7 +63,6 @@ In order to testability of the web api project, There are 2 tables named "Produc
 
 # To Do / Nice to Have
 
-- Category Update/Delete actions.
 - Redis DB
 - Unit Test
 - Docker Deployment
