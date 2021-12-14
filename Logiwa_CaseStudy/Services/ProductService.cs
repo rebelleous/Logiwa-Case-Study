@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Logiwa_CaseStudy.Models;
+using Logiwa_CaseStudy.Models.Dtos;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -35,20 +36,22 @@ namespace Logiwa_CaseStudy.Services
             return _context.Products.Where(m => m.StockQuantity >= minVal && m.StockQuantity <= maxVal).ToList();
         }
 
-        public void Create(CreateProduct model)
+        
+
+        public void Create(CrUpProduct model)
         {
             var product = _mapper.Map<Product>(model);
             _context.Products.Add(product);
             _context.SaveChanges();
         }
 
-        public void Update(int id, UpdateProduct model)
+        public void Update(int id, CrUpProduct model)
         {
-            var product = getProduct(id);
 
-            _mapper.Map(model, product);
+            var product =_mapper.Map<Product>(model);
             _context.Products.Update(product);
             _context.SaveChanges();
+
         }
 
         public void Delete(int id)

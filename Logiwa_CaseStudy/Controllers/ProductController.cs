@@ -26,7 +26,7 @@ namespace Logiwa_CaseStudy.Controllers
 
        
 
-        // GET: api/<ProductsController>
+        
         [HttpGet("[action]")] // [HttpGet] birden fazla Get fonk. olduğunda action ismini veriyor.
 
         public IEnumerable<Product> Get()
@@ -48,17 +48,17 @@ namespace Logiwa_CaseStudy.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(CreateProduct model)
+        public IActionResult Create(CrUpProduct model)
         {
             _productService.Create(model);
             return Ok(new { mesage = "Product created." });
         }
 
         [HttpPut]
-        public IActionResult Update(int id, UpdateProduct model)
+        public IActionResult Update(int id, CrUpProduct model)
         {
             _productService.Update(id, model);
-            return Ok(new { message = "User updated." });
+            return Ok(new { message = "Product updated." });
         }
 
 
@@ -66,7 +66,7 @@ namespace Logiwa_CaseStudy.Controllers
         public IActionResult Delete(int id)
         {
             _productService.Delete(id);
-            return Ok(new { message = "User deleted" });
+            return Ok(new { message = "Product deleted." });
         }
     }
 }

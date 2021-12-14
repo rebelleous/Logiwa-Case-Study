@@ -11,8 +11,8 @@ namespace Logiwa_CaseStudy.Helpers
     {
         public Mapping()
         {
-            CreateMap<CreateProduct, Product>();//.ForMember(model => model.category, opts => opts.MapFrom(src => src.category.Name)).ReverseMap();
-            CreateMap<CreateCategory, Category>();//.ReverseMap();
+            CreateMap<Product, CrUpProduct>().ForMember(model => model.CategoryID, opts => opts.MapFrom(src => src.category.ID)).ReverseMap();
+            CreateMap<Category, CreateCategory>().ReverseMap();
         }
     }
 }

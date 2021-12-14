@@ -14,9 +14,9 @@ namespace Logiwa_CaseStudy.Services
 
         List<Product> SearchByStockRange(int minVal=1, int maxVal=200);
 
-        void Create(CreateProduct model);
+        void Create(CrUpProduct model);
 
-        void Update(int id, UpdateProduct model);
+        void Update(int id, CrUpProduct model);
 
         void Delete(int id);
     }

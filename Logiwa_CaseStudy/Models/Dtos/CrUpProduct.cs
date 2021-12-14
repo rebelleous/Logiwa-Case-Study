@@ -8,19 +8,14 @@ using System.Threading.Tasks;
 
 namespace Logiwa_CaseStudy.Models
 {
-    public class CreateProduct
+    public class CrUpProduct
     {
+        public int ID { get; set; }
         public string Description { get; set; }
 
-        [NotNull]
-        [MaxLength(200)]
         public string Title { get; set; }
 
         public int StockQuantity { get; set; }
-
-        [JsonIgnore]
-        //[EnumDataType(typeof(Category))]
-        public virtual Category category { get; set; }
 
         public int CategoryID { get; set; }
     }
