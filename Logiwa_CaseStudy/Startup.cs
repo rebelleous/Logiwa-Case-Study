@@ -34,9 +34,9 @@ namespace Logiwa_CaseStudy
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddMvc().AddFluentValidation(fvc => fvc.RegisterValidatorsFromAssemblyContaining<Startup>()); // fluent validation inj.
-            services.AddTransient<IValidator<Product>, ProductValidator>();
-            services.AddAutoMapper(typeof(Startup));
+            services.AddMvc().AddFluentValidation(fvc => fvc.RegisterValidatorsFromAssemblyContaining<ProductValidator>()); // fluent validation inj.
+            services.AddTransient<IValidator<CrUpProduct>, ProductValidator>();
+            services.AddAutoMapper(typeof(Mapping));
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

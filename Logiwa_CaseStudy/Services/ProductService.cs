@@ -13,16 +13,18 @@ namespace Logiwa_CaseStudy.Services
     {
         private readonly ApplicationDBContext _context;
         private readonly IMapper _mapper;
-        public ProductService(ApplicationDBContext context)
+
+        public ProductService(ApplicationDBContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper; // işkence satırı
         }
 
-        
-        public List<Product> ListAllProducts()
+
+        public List<GetProductDto> ListAllProducts()
         {
 
-            return _context.Products.ToList();
+            return _mapper.Map<List<GetProductDto>>(_context.Products.Include(m=> m.category).ToList());
         }
 
         public List<Product> SearchByCriteria(string title, string description, string categoryName)
@@ -31,7 +33,7 @@ namespace Logiwa_CaseStudy.Services
             return _context.Products.Where(m => m.Title.ToLower().Contains(title.ToLower()) && m.Description.ToLower().Contains(description.ToLower()) && m.category.Name.ToLower().Contains(categoryName.ToLower())).ToList();
         }
 
-        public List<Product> SearchByStockRange(int minVal = 1, int maxVal = 200)
+        public List<Product> SearchByStockRange(int minVal, int maxVal)
         {
             return _context.Products.Where(m => m.StockQuantity >= minVal && m.StockQuantity <= maxVal).ToList();
         }

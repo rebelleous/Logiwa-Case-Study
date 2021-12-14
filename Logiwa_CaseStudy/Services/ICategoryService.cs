@@ -9,6 +9,9 @@ namespace Logiwa_CaseStudy.Services
     public interface ICategoryService
     {
         List<Category> ListAllCategories();
-        
+
+        void Create(CreateCategory model);
+
+        void Update(int id, CreateCategory model);
     }
 }

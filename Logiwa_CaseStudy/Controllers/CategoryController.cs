@@ -27,6 +27,13 @@ namespace Logiwa_CaseStudy.Controllers
             return _categoryService.ListAllCategories();
         }
 
+        [HttpPost]
+        public IActionResult Create(CreateCategory model)
+        {
+            _categoryService.Create(model);
+            return Ok(new { mesage = "Category created." });
+        }
+
 
     }
 }

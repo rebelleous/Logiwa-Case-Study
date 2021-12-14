@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Logiwa_CaseStudy.Models;
+using Logiwa_CaseStudy.Models.Dtos;
 using Logiwa_CaseStudy.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -29,7 +30,7 @@ namespace Logiwa_CaseStudy.Controllers
         
         [HttpGet("[action]")] // [HttpGet] birden fazla Get fonk. olduğunda action ismini veriyor.
 
-        public IEnumerable<Product> Get()
+        public IEnumerable<GetProductDto> Get()
         {
             return _productService.ListAllProducts();
         }
@@ -42,7 +43,7 @@ namespace Logiwa_CaseStudy.Controllers
         }
 
         [HttpGet("[action]")]
-        public IEnumerable<Product> GetByQuantity(int minVal = 1, int maxVal = 200)
+        public IEnumerable<Product> GetByQuantity(int minVal = 1, int maxVal = 200) // default parameter.
         {
             return _productService.SearchByStockRange(minVal, maxVal);
         }

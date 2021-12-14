@@ -1,4 +1,5 @@
 ﻿using Logiwa_CaseStudy.Models;
+using Logiwa_CaseStudy.Models.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,11 +9,11 @@ namespace Logiwa_CaseStudy.Services
 {
     public interface IProductService
     {
-        List<Product> ListAllProducts();
+        List<GetProductDto> ListAllProducts();
 
         List<Product> SearchByCriteria(string title, string description, string categoryName); // entity framework search, bycriteria, filtering
 
-        List<Product> SearchByStockRange(int minVal=1, int maxVal=200);
+        List<Product> SearchByStockRange(int minVal, int maxVal);
 
         void Create(CrUpProduct model);
 
