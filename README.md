@@ -18,6 +18,7 @@ It has been designed and coded in accordance with the Domain Driven Design struc
 
 ## Endpoints
 **Product Controller**
+
 ![Product Controller](https://i.ibb.co/zs5Fq2v/resim-2021-12-14-224210.png)
 
 - /api/product/ [HttpGet]
@@ -41,14 +42,20 @@ It has been designed and coded in accordance with the Domain Driven Design struc
 <br>
 
 **Category Controller**
-![CategoryController](https://i.ibb.co/GTNdGFY/resim-2021-12-14-225153.png)
+
+![CategoryController](https://i.ibb.co/LtfsYJg/resim-2021-12-15-010926.png)
 
 - /api/category/ [HttpGet]
 > This HttpGet action lists all Categories.
 
 - /api/category/ [HttpPost]
 > This HttpPost action creates category category.
-- Update and Delete Endpoints will be added. (To Do)
+
+- /api/category/ [HttpPut]
+> This HttpPut action updates the category that chosen by Category's ID.
+
+- /api/category/{id} [HttpDelete]
+> This HttpDelete deletes the category that chosen by Category's ID.
 
 ## Seed Data
 
@@ -58,7 +65,6 @@ In order to testability of the web api project, There are 2 tables named "Produc
 
 # To Do / Nice to Have
 
-- Category Update/Delete actions.
 - Redis DB
 - Unit Test
 - Docker Deployment
