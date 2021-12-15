@@ -25,9 +25,9 @@ namespace Logiwa_CaseStudy.Controllers
         }
         // GET: api/<CategoryController>
         [HttpGet]
-        public IEnumerable<Category> Get()
+        public IActionResult Get()
         {
-            return _categoryService.ListAllCategories();
+            return Ok(_categoryService.ListAllCategories());
         }
 
         [HttpPost]
