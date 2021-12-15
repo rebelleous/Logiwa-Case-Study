@@ -16,5 +16,7 @@ RUN dotnet publish "Logiwa_CaseStudy.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
+RUN rm -f logiwadb.db
+RUN touch logiwadb.db
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "Logiwa_CaseStudy.dll"]
