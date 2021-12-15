@@ -65,9 +65,10 @@ In order to testability of the web api project, There are 2 tables named "Produc
 
 # To Do / Nice to Have
 
-- Redis DB
-- Unit Test
-- Docker Deployment
-- Generic Repository, Unit of Work
-
-
+Done? | To Do
+:---:| ---
+⬜️| Redis DB
+✅| SQL Server (DB Change)
+✅| Docker Deployment
+⬜️| Unit Test
+⬜️| Generic Repository
