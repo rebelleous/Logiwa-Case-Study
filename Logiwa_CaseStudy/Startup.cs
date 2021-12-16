@@ -6,6 +6,7 @@ using Logiwa_CaseStudy.Models.Validator;
 using Logiwa_CaseStudy.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using StackExchange.Redis;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +19,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
 
 namespace Logiwa_CaseStudy
 {
@@ -38,6 +40,11 @@ namespace Logiwa_CaseStudy
             services.AddTransient<IValidator<CrUpProduct>, ProductValidator>();
             services.AddAutoMapper(typeof(Mapping));
             services.AddControllers();
+            services.AddSingleton<ICacheService, RedisCacheService>();
+            IConnectionMultiplexer redis = ConnectionMultiplexer.Connect("172.17.0.1:6379");
+            services.AddScoped(x => redis.GetDatabase());
+
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Logiwa_CaseStudy", Version = "v1" });
