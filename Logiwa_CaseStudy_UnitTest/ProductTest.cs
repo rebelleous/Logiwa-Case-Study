@@ -43,7 +43,55 @@ namespace Logiwa_CaseStudy_UnitTest
             var mockController = new ProductController(mockRepo.Object, mapper);
 
             //Act  
-            var data = mockController.GetByQuantity();
+            var data = mockController.Get();
+
+            //Assert  
+            Assert.IsType<OkObjectResult>(data);
+        }
+
+        [Fact]
+        public void Task_CreateProducts_Return_OkResult()
+        {
+
+            var mockRepo = new Mock<IProductService>();
+            mockRepo.Setup(repo => repo.Create(new CrUpProduct()));
+
+            var mockController = new ProductController(mockRepo.Object, mapper);
+
+            //Act  
+            var data = mockController.Create(new CrUpProduct());
+
+            //Assert  
+            Assert.IsType<OkObjectResult>(data);
+        }
+
+        [Fact]
+        public void Task_UpdateProducts_Return_OkResult()
+        {
+
+            var mockRepo = new Mock<IProductService>();
+            mockRepo.Setup(repo => repo.Update(1, new CrUpProduct()));
+
+            var mockController = new ProductController(mockRepo.Object, mapper);
+
+            //Act  
+            var data = mockController.Update(1, new CrUpProduct());
+
+            //Assert  
+            Assert.IsType<OkObjectResult>(data);
+        }
+
+        [Fact]
+        public void Task_DeleteProducts_Return_OkResult()
+        {
+
+            var mockRepo = new Mock<IProductService>();
+            mockRepo.Setup(repo => repo.Delete(1));
+
+            var mockController = new ProductController(mockRepo.Object, mapper);
+
+            //Act  
+            var data = mockController.Delete(1);
 
             //Assert  
             Assert.IsType<OkObjectResult>(data);
@@ -59,7 +107,23 @@ namespace Logiwa_CaseStudy_UnitTest
             var mockController = new ProductController(mockRepo.Object, mapper);
 
             //Act  
-            var data = mockController.Get();
+            var data = mockController.GetByQuantity();
+
+            //Assert  
+            Assert.IsType<OkObjectResult>(data);
+        }
+
+        [Fact]
+        public void Task_SearchByCriteria_Return_OkResult()
+        {
+
+            var mockRepo = new Mock<IProductService>();
+            mockRepo.Setup(repo => repo.SearchByCriteria("a", "a", "e"));
+
+            var mockController = new ProductController(mockRepo.Object, mapper);
+
+            //Act  
+            var data = mockController.GetByCriteria();
 
             //Assert  
             Assert.IsType<OkObjectResult>(data);
@@ -81,6 +145,23 @@ namespace Logiwa_CaseStudy_UnitTest
 
             var mockController = new ProductController(mockRepo.Object, mapper);
             var OkResult = Assert.IsType<OkObjectResult>(mockController.GetByQuantity(30, 50));
+            //Act  
+            var returnProducts = Assert.IsAssignableFrom<List<Product>>(OkResult.Value);
+            var countSize = returnProducts.ToList().Count;
+
+            //Assert  
+            Assert.Equal(1, countSize);
+        }
+
+        [Fact]
+        public void Task_SearchByCriteria_Return_EqualCount()
+        {
+
+            var mockRepo = new Mock<IProductService>();
+            mockRepo.Setup(repo => repo.SearchByCriteria("a", "a", "e")).Returns(products);
+
+            var mockController = new ProductController(mockRepo.Object, mapper);
+            var OkResult = Assert.IsType<OkObjectResult>(mockController.GetByCriteria("a", "a", "e"));
             //Act  
             var returnProducts = Assert.IsAssignableFrom<List<Product>>(OkResult.Value);
             var countSize = returnProducts.ToList().Count;

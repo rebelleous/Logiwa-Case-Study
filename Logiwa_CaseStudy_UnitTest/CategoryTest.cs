@@ -44,6 +44,54 @@ namespace Logiwa_CaseStudy_UnitTest
             //Assert  
             Assert.IsType<OkObjectResult>(data);
         }
+
+        [Fact]
+        public void Task_CreateCategories_Return_OkResult()
+        {
+
+            var mockRepo = new Mock<ICategoryService>();
+            mockRepo.Setup(repo => repo.Create(new CreateCategory()));
+
+            var mockController = new CategoryController(mockRepo.Object, mapper);
+
+            //Act  
+            var data = mockController.Create(new CreateCategory());
+
+            //Assert  
+            Assert.IsType<OkObjectResult>(data);
+        }
+
+        [Fact]
+        public void Task_UpdateCategories_Return_OkResult()
+        {
+
+            var mockRepo = new Mock<ICategoryService>();
+            mockRepo.Setup(repo => repo.Update(1, new CreateCategory()));
+
+            var mockController = new CategoryController(mockRepo.Object, mapper);
+
+            //Act  
+            var data = mockController.Update(1, new CreateCategory());
+
+            //Assert  
+            Assert.IsType<OkObjectResult>(data);
+        }
+
+        [Fact]
+        public void Task_DeleteCategories_Return_OkResult()
+        {
+
+            var mockRepo = new Mock<ICategoryService>();
+            mockRepo.Setup(repo => repo.Delete(1));
+
+            var mockController = new CategoryController(mockRepo.Object, mapper);
+
+            //Act  
+            var data = mockController.Delete(1);
+
+            //Assert  
+            Assert.IsType<OkObjectResult>(data);
+        }
         #endregion
 
         #region Equal Testleri

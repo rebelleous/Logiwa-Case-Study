@@ -26,21 +26,21 @@ namespace Logiwa_CaseStudy.Controllers
 
               
         [HttpGet("[action]")] // [HttpGet] birden fazla Get fonk. olduğunda action ismini veriyor.
-        public IEnumerable<GetProductDto> Get()
+        public IActionResult Get()
         {
-            return _productService.ListAllProducts();
+            return Ok(_productService.ListAllProducts());
         }
 
         [HttpGet("[action]")]
-        public IEnumerable<Product> GetByCriteria(string title = "", string description = "", string categoryName = "") // Could have named the same function name with override.
+        public IActionResult GetByCriteria(string title = "", string description = "", string categoryName = "") // Could have named the same function name with override.
         {
-            return _productService.SearchByCriteria(title, description, categoryName);
+            return Ok(_productService.SearchByCriteria(title, description, categoryName));
         }
 
         [HttpGet("[action]")]
-        public IEnumerable<Product> GetByQuantity(int minVal = 1, int maxVal = 200) // default parameter.
+        public IActionResult GetByQuantity(int minVal = 1, int maxVal = 200) // default parameter.
         {
-            return _productService.SearchByStockRange(minVal, maxVal); // Search by stock range
+            return Ok(_productService.SearchByStockRange(minVal, maxVal)); // Search by stock range
         }
 
         [HttpPost]
