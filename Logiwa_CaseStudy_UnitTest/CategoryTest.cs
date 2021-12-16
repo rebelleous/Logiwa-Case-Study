@@ -15,13 +15,23 @@ namespace Logiwa_CaseStudy_UnitTest
     public class CategoryTest
     {
 
+        #region Static Objects
+
+        List<Category> categories = new List<Category>
+            {
+                        new Category(){Name="Elektronik",MinStockQuantity=5},
+
+            };
+        static Mapping myProfile = new Mapping();
+        static MapperConfiguration configuration = new MapperConfiguration(cfg => cfg.AddProfile(myProfile));
+        IMapper mapper = new Mapper(configuration);
+
+        #endregion
+
+        #region OkResult Testleri
         [Fact]
         public void Task_GetCategories_Return_OkResult()
         {
-            var myProfile = new Mapping();
-            var configuration = new MapperConfiguration(cfg => cfg.AddProfile(myProfile));
-            IMapper mapper = new Mapper(configuration);
-
 
             var mockRepo = new Mock<ICategoryService>();
             mockRepo.Setup(repo => repo.ListAllCategories());
@@ -34,21 +44,12 @@ namespace Logiwa_CaseStudy_UnitTest
             //Assert  
             Assert.IsType<OkObjectResult>(data);
         }
+        #endregion
 
+        #region Equal Testleri
         [Fact]
         public void Task_GetCategories_Return_GreaterThanOne()
         {
-            var myProfile = new Mapping();
-            var configuration = new MapperConfiguration(cfg => cfg.AddProfile(myProfile));
-            IMapper mapper = new Mapper(configuration);
-
-            var categories = new List<Category> 
-            {
-                        new Category(){Name="Elektronik",MinStockQuantity=5},
-                        new Category(){Name="Moda",MinStockQuantity=10},
-                        new Category(){Name="Spor",MinStockQuantity=15},
-                        new Category(){Name="Otomotiv",MinStockQuantity=20}, 
-            };
 
             var mockRepo = new Mock<ICategoryService>();
             mockRepo.Setup(repo => repo.ListAllCategories()).Returns(categories);
@@ -57,10 +58,11 @@ namespace Logiwa_CaseStudy_UnitTest
             var OkResult = Assert.IsType<OkObjectResult>(mockController.Get());
             //Act  
             var returnCategories = Assert.IsAssignableFrom<List<Category>>(OkResult.Value);
-            var data = returnCategories.ToList().Count;
+            var countSize = returnCategories.ToList().Count;
 
             //Assert  
-            Assert.True(data >= 4, "Expected value greater than 4");
+            Assert.Equal(1, countSize);
         }
+        #endregion
     }
 }
