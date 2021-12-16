@@ -65,10 +65,10 @@ In order to testability of the web api project, There are 2 tables named "Produc
 
 # To Do / Nice to Have
 
-Done? | To Do
-:---:| ---
-⬜️| Redis DB
-✅| SQL Server (DB Change)
-✅| Docker Deployment
-✅| Unit Test
-⬜️| Generic Repository
+Done? | To Do | Date
+:---:| :---: | ---
+✅| SQL Server (DB Change) | 15.12.2021
+✅| Docker Deployment | 15.12.2021
+✅| Unit Test | 16.12.2021
+⬜️| Redis DB | 
+⬜️| Generic Repository | 
