@@ -70,5 +70,5 @@ Done? | To Do
 ⬜️| Redis DB
 ✅| SQL Server (DB Change)
 ✅| Docker Deployment
-⬜️| Unit Test
+✅| Unit Test
 ⬜️| Generic Repository
