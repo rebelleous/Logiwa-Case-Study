@@ -67,8 +67,8 @@ In order to testability of the web api project, There are 2 tables named "Produc
 
 Done? | To Do | Date
 :---:| :---: | ---
-⬜️| Redis DB | 
 ✅| SQL Server (DB Change) | 15.12.2021
 ✅| Docker Deployment | 15.12.2021
 ✅| Unit Test | 16.12.2021
+⬜️| Redis DB | 
 ⬜️| Generic Repository | 
