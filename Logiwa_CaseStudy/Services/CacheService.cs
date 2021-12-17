@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Logiwa_CaseStudy.Services
 {
-    public class RedisCacheService : ICacheService
+    public class CacheService : ICacheService
     {
         private readonly ConnectionMultiplexer _client;
 
-        public RedisCacheService(IConfiguration configuration)
+        public CacheService(IConfiguration configuration)
         {
             var connectionString = configuration.GetSection("RedisConfiguration:ConnectionString")?.Value;
 
@@ -29,17 +29,6 @@ namespace Logiwa_CaseStudy.Services
 
             _client = ConnectionMultiplexer.Connect(options); // Redis'e bağlanmak için.
         }
-        public T Get<T>(string key) where T : class
-        {
-            string value = _client.GetDatabase().StringGet(key);
-
-            return value.ToObject<T>();
-        }
-
-        public string Get(string key)
-        {
-            return _client.GetDatabase().StringGet(key);
-        }
 
         public async Task<T> GetAsync<T>(string key) where T : class
         {
@@ -53,20 +42,6 @@ namespace Logiwa_CaseStudy.Services
             _client.GetDatabase().KeyDelete(key);
         }
 
-        public void Set(string key, string value)
-        {
-            _client.GetDatabase().StringSet(key, value);
-        }
-
-        public void Set<T>(string key, T value) where T : class
-        {
-            _client.GetDatabase().StringSet(key, value.ToJson());
-        }
-
-        public void Set(string key, object value, TimeSpan expiration)
-        {
-            _client.GetDatabase().StringSet(key, value.ToJson(), expiration);
-        }
 
         public Task SetAsync(string key, object value)
         {

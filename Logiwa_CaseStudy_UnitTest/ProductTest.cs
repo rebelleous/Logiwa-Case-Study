@@ -118,7 +118,7 @@ namespace Logiwa_CaseStudy_UnitTest
         {
 
             var mockRepo = new Mock<IProductService>();
-            mockRepo.Setup(repo => repo.SearchByCriteria("a", "a", "e"));
+            mockRepo.Setup(repo => repo.SearchByCriteriaAsync("a", "a", "e"));
 
             var mockController = new ProductController(mockRepo.Object, mapper);
 
@@ -158,7 +158,7 @@ namespace Logiwa_CaseStudy_UnitTest
         {
 
             var mockRepo = new Mock<IProductService>();
-            mockRepo.Setup(repo => repo.SearchByCriteria("a", "a", "e")).Returns(products);
+            mockRepo.Setup(repo => repo.SearchByCriteriaAsync("a", "a", "e")).Returns(products);
 
             var mockController = new ProductController(mockRepo.Object, mapper);
             var OkResult = Assert.IsType<OkObjectResult>(mockController.GetByCriteria("a", "a", "e"));

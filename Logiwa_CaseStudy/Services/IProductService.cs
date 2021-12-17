@@ -11,9 +11,9 @@ namespace Logiwa_CaseStudy.Services
     {
         List<GetProductDto> ListAllProducts();
 
-        List<Product> SearchByCriteria(string title, string description, string categoryName); // entity framework search, bycriteria, filtering
+        Task<List<Product>> SearchByCriteria(string title, string description, string categoryName); // entity framework search, bycriteria, filtering
 
-        List<Product> SearchByStockRange(int minVal, int maxVal);
+        Task<List<Product>> SearchByStockRange(int minVal, int maxVal);
 
         void Create(CrUpProduct model);
 

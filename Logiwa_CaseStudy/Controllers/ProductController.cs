@@ -31,16 +31,16 @@ namespace Logiwa_CaseStudy.Controllers
             return Ok(_productService.ListAllProducts());
         }
 
-        [HttpGet("[action]")]
-        public IActionResult GetByCriteria(string title = "", string description = "", string categoryName = "") // Could have named the same function name with override.
+        [HttpGet("[action]")] 
+        public async Task<IActionResult> GetByCriteria(string title = "", string description = "", string categoryName = "") //Redis'e outsource request atarken SQL verisini bekletmek amacıyla Async yapıldı. 
         {
-            return Ok(_productService.SearchByCriteria(title, description, categoryName));
+            return Ok(await _productService.SearchByCriteria(title, description, categoryName));
         }
 
         [HttpGet("[action]")]
-        public IActionResult GetByQuantity(int minVal = 1, int maxVal = 200) // default parameter.
+        public async Task<IActionResult> GetByQuantity(int minVal = 1, int maxVal = 200) // default parameter.
         {
-            return Ok(_productService.SearchByStockRange(minVal, maxVal)); // Search by stock range
+            return Ok(await _productService.SearchByStockRange(minVal, maxVal)); // Search by stock range
         }
 
         [HttpPost]

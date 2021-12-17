@@ -40,7 +40,7 @@ namespace Logiwa_CaseStudy
             services.AddTransient<IValidator<CrUpProduct>, ProductValidator>();
             services.AddAutoMapper(typeof(Mapping));
             services.AddControllers();
-            services.AddSingleton<ICacheService, RedisCacheService>();
+            services.AddSingleton<ICacheService, CacheService>();
             IConnectionMultiplexer redis = ConnectionMultiplexer.Connect("172.17.0.1:6379");
             services.AddScoped(x => redis.GetDatabase());
 
