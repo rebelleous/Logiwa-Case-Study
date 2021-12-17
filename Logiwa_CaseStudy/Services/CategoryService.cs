@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
 using Logiwa_CaseStudy.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Logiwa_CaseStudy.Services
 {
@@ -18,7 +16,7 @@ namespace Logiwa_CaseStudy.Services
             _mapper = mapper;
         }
 
-        public void Create(CreateCategory model)
+        public void Create(CreateCategoryDto model)
         {
             var category = _mapper.Map<Category>(model);
             _context.Categories.Add(category);
@@ -37,9 +35,10 @@ namespace Logiwa_CaseStudy.Services
             return _context.Categories.ToList();
         }
 
-        public void Update(int id, CreateCategory model)
+        public void Update(int id, CreateCategoryDto model)
         {
             var category = _mapper.Map<Category>(model);
+            category.ID = id;
             _context.Categories.Update(category);
             _context.SaveChanges();
         }

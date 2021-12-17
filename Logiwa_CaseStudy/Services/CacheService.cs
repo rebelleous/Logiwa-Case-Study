@@ -2,8 +2,6 @@
 using Microsoft.Extensions.Configuration;
 using StackExchange.Redis;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Logiwa_CaseStudy.Services
@@ -20,14 +18,14 @@ namespace Logiwa_CaseStudy.Services
             {
                 EndPoints =
                 {
-                    connectionString // redis'e bağlanılacak olan url
+                    connectionString 
                 },
-                AbortOnConnectFail = false, // redis'e bağlanamadığı durumda
-                AsyncTimeout = 1000, // Redis'e async isteklerde 10 saniyeden geç yanıt verirse timeouta düşmesi için
-                ConnectTimeout = 1000 // Redis'e normal isteklerde 10 saniyeden geç yanıt verirse timeouta düşmesi için
+                AbortOnConnectFail = false,
+                AsyncTimeout = 1000, 
+                ConnectTimeout = 1000 
             };
 
-            _client = ConnectionMultiplexer.Connect(options); // Redis'e bağlanmak için.
+            _client = ConnectionMultiplexer.Connect(options); 
         }
 
         public async Task<T> GetAsync<T>(string key) where T : class
@@ -41,7 +39,6 @@ namespace Logiwa_CaseStudy.Services
         {
             _client.GetDatabase().KeyDelete(key);
         }
-
 
         public Task SetAsync(string key, object value)
         {

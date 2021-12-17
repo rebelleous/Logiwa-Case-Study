@@ -1,8 +1,6 @@
 ﻿using Logiwa_CaseStudy.Models;
 using Logiwa_CaseStudy.Models.Dtos;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Logiwa_CaseStudy.Services
@@ -11,13 +9,13 @@ namespace Logiwa_CaseStudy.Services
     {
         List<GetProductDto> ListAllProducts();
 
-        Task<List<Product>> SearchByCriteria(string title, string description, string categoryName); // entity framework search, bycriteria, filtering
+        Task<List<Product>> SearchByCriteria(string title, string description, string categoryName); 
 
         Task<List<Product>> SearchByStockRange(int minVal, int maxVal);
 
-        void Create(CrUpProduct model);
+        void Create(CreateUpdateProductDto model);
 
-        void Update(int id, CrUpProduct model);
+        void Update(int id, CreateUpdateProductDto model);
 
         void Delete(int id);
     }

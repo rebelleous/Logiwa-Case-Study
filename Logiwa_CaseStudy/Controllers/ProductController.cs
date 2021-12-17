@@ -1,11 +1,7 @@
 ﻿using AutoMapper;
 using Logiwa_CaseStudy.Models;
-using Logiwa_CaseStudy.Models.Dtos;
 using Logiwa_CaseStudy.Services;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 
@@ -25,7 +21,7 @@ namespace Logiwa_CaseStudy.Controllers
         }
 
               
-        [HttpGet("[action]")] // [HttpGet] birden fazla Get fonk. olduğunda action ismini veriyor.
+        [HttpGet]
         public IActionResult Get()
         {
             return Ok(_productService.ListAllProducts());
@@ -45,7 +41,7 @@ namespace Logiwa_CaseStudy.Controllers
 
         [HttpPost]
         /// Create function w HttpPost
-        public IActionResult Create(CrUpProduct model) 
+        public IActionResult Create(CreateUpdateProductDto model) 
         {
             _productService.Create(model);
             return Ok(new { mesage = "Product created." });
@@ -53,7 +49,7 @@ namespace Logiwa_CaseStudy.Controllers
 
         [HttpPut]
         /// Update function w HttpPut
-        public IActionResult Update(int id, CrUpProduct model) 
+        public IActionResult Update(int id, CreateUpdateProductDto model) 
         {
             _productService.Update(id, model);
             return Ok(new { message = "Product updated." });

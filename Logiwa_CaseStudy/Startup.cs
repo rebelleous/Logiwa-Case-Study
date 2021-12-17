@@ -7,18 +7,11 @@ using Logiwa_CaseStudy.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using StackExchange.Redis;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 
 namespace Logiwa_CaseStudy
@@ -37,11 +30,11 @@ namespace Logiwa_CaseStudy
         {
 
             services.AddMvc().AddFluentValidation(fvc => fvc.RegisterValidatorsFromAssemblyContaining<ProductValidator>()); // fluent validation inj.
-            services.AddTransient<IValidator<CrUpProduct>, ProductValidator>();
+            services.AddTransient<IValidator<CreateUpdateProductDto>, ProductValidator>();
             services.AddAutoMapper(typeof(Mapping));
             services.AddControllers();
             services.AddSingleton<ICacheService, CacheService>();
-            IConnectionMultiplexer redis = ConnectionMultiplexer.Connect("172.17.0.1:6379");
+            IConnectionMultiplexer redis = ConnectionMultiplexer.Connect(Configuration.GetSection("RedisConfiguration:ConnectionString")?.Value);
             services.AddScoped(x => redis.GetDatabase());
 
 
@@ -49,10 +42,9 @@ namespace Logiwa_CaseStudy
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Logiwa_CaseStudy", Version = "v1" });
             });
-            services.AddDbContext<ApplicationDBContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("SqlConnection"))); //veritabaný tanýmlama
+            services.AddDbContext<ApplicationDBContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("SqlConnection"))); 
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<ICategoryService, CategoryService>();
-            
         }
 
   
@@ -60,13 +52,12 @@ namespace Logiwa_CaseStudy
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
-               
+                app.UseDeveloperExceptionPage();             
             }
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Logiwa_CaseStudy v1"));
 
-            SeedingData.Seed(app); // Seed the data
+            SeedingData.Seed(app); 
             app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -75,7 +66,7 @@ namespace Logiwa_CaseStudy
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers(); // Map controllerda end point belirtimi.
+                endpoints.MapControllers(); 
             });
         }
     }

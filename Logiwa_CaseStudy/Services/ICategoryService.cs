@@ -1,8 +1,5 @@
 ﻿using Logiwa_CaseStudy.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Logiwa_CaseStudy.Services
 {
@@ -10,9 +7,9 @@ namespace Logiwa_CaseStudy.Services
     {
         List<Category> ListAllCategories();
 
-        void Create(CreateCategory model);
+        void Create(CreateCategoryDto model);
 
-        void Update(int id, CreateCategory model);
+        void Update(int id, CreateCategoryDto model);
 
         void Delete(int id);
     }

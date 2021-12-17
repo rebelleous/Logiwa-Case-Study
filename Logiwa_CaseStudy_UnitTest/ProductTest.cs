@@ -6,10 +6,8 @@ using Logiwa_CaseStudy.Models.Dtos;
 using Logiwa_CaseStudy.Services;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -54,12 +52,12 @@ namespace Logiwa_CaseStudy_UnitTest
         {
 
             var mockRepo = new Mock<IProductService>();
-            mockRepo.Setup(repo => repo.Create(new CrUpProduct()));
+            mockRepo.Setup(repo => repo.Create(new CreateUpdateProductDto()));
 
             var mockController = new ProductController(mockRepo.Object, mapper);
 
             //Act  
-            var data = mockController.Create(new CrUpProduct());
+            var data = mockController.Create(new CreateUpdateProductDto());
 
             //Assert  
             Assert.IsType<OkObjectResult>(data);
@@ -70,12 +68,12 @@ namespace Logiwa_CaseStudy_UnitTest
         {
 
             var mockRepo = new Mock<IProductService>();
-            mockRepo.Setup(repo => repo.Update(1, new CrUpProduct()));
+            mockRepo.Setup(repo => repo.Update(1, new CreateUpdateProductDto()));
 
             var mockController = new ProductController(mockRepo.Object, mapper);
 
             //Act  
-            var data = mockController.Update(1, new CrUpProduct());
+            var data = mockController.Update(1, new CreateUpdateProductDto());
 
             //Assert  
             Assert.IsType<OkObjectResult>(data);

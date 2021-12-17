@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Logiwa_CaseStudy.Services
 {
 
     /// Redise bağlanmak için kullanacağımız servisleri oluşturduk.
- 
+
     public interface ICacheService
     {
         Task SetAsync(string key, object value);

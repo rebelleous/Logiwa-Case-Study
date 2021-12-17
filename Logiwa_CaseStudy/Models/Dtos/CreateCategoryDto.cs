@@ -1,11 +1,8 @@
 ﻿namespace Logiwa_CaseStudy.Models
 {
-    public class Category
+    public class CreateCategoryDto // Info's asked when Creating Category
     {
-        public int ID { get; set; }
         public string Name { get; set; }
         public int MinStockQuantity { get; set; }
-
     }
-
 }

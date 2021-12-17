@@ -1,12 +1,10 @@
 ﻿using AutoMapper;
-using Logiwa_CaseStudy.Extensions;
 using Logiwa_CaseStudy.Models;
 using Logiwa_CaseStudy.Models.Dtos;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Logiwa_CaseStudy.Services
@@ -25,10 +23,8 @@ namespace Logiwa_CaseStudy.Services
             _cacheService = cacheService;
         }
 
-
         public List<GetProductDto> ListAllProducts()
         {
-
             return _mapper.Map<List<GetProductDto>>(_context.Products.Include(m=> m.category).ToList());
         }
 
@@ -46,10 +42,8 @@ namespace Logiwa_CaseStudy.Services
                     .Where(m => m.Title.ToLower().Contains(title.ToLower()) && m.Description.ToLower().Contains(description.ToLower()) && m.category.Name.ToLower().Contains(categoryName.ToLower()))
                     .ToListAsync();
                 
-                await _cacheService.SetAsync(redisId, products);
-                return products;
-
-            
+                await _cacheService.SetAsync(redisId, products, TimeSpan.FromMinutes(5));
+                return products;      
             }
         }
 
@@ -64,24 +58,24 @@ namespace Logiwa_CaseStudy.Services
             else
             {
                 var products = await _context.Products.Where(m => m.StockQuantity >= minVal && m.StockQuantity <= maxVal).ToListAsync();
-                await _cacheService.SetAsync(redisId, products);
+                await _cacheService.SetAsync(redisId, products, TimeSpan.FromMinutes(5));
                 return products;
             }
             
         }
 
         
-
-        public void Create(CrUpProduct model)
+        public void Create(CreateUpdateProductDto model)
         {
             var product = _mapper.Map<Product>(model);
             _context.Products.Add(product); // Flag for adding
-            _context.SaveChanges(); //Controller isteği karşılar sonra middleware a bakar sonrası servise düşer. Servisten veritabanına flag koyar. Veritabanı bunu uygular ve geri döner.
+            _context.SaveChanges(); 
         }
 
-        public void Update(int id, CrUpProduct model)
+        public void Update(int id, CreateUpdateProductDto model)
         {
             var product =_mapper.Map<Product>(model);
+            product.ID = id;
             _context.Products.Update(product);
             _context.SaveChanges();
         }

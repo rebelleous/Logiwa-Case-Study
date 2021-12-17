@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+﻿using System.Text.Json.Serialization;
 
 namespace Logiwa_CaseStudy.Models
 {
@@ -15,7 +9,7 @@ namespace Logiwa_CaseStudy.Models
         public string Description { get; set; }
 
         //[NotNull]
-        //[MaxLength(200)]
+        //[MaxLength(200)] [İlk olarak annotation olarak validasyonları vermiştim]
         public string Title { get; set; }
 
         public int StockQuantity { get; set; }

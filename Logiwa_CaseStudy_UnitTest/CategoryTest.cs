@@ -5,7 +5,6 @@ using Logiwa_CaseStudy.Models;
 using Logiwa_CaseStudy.Services;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
@@ -50,12 +49,12 @@ namespace Logiwa_CaseStudy_UnitTest
         {
 
             var mockRepo = new Mock<ICategoryService>();
-            mockRepo.Setup(repo => repo.Create(new CreateCategory()));
+            mockRepo.Setup(repo => repo.Create(new CreateCategoryDto()));
 
             var mockController = new CategoryController(mockRepo.Object, mapper);
 
             //Act  
-            var data = mockController.Create(new CreateCategory());
+            var data = mockController.Create(new CreateCategoryDto());
 
             //Assert  
             Assert.IsType<OkObjectResult>(data);
@@ -66,12 +65,12 @@ namespace Logiwa_CaseStudy_UnitTest
         {
 
             var mockRepo = new Mock<ICategoryService>();
-            mockRepo.Setup(repo => repo.Update(1, new CreateCategory()));
+            mockRepo.Setup(repo => repo.Update(1, new CreateCategoryDto()));
 
             var mockController = new CategoryController(mockRepo.Object, mapper);
 
             //Act  
-            var data = mockController.Update(1, new CreateCategory());
+            var data = mockController.Update(1, new CreateCategoryDto());
 
             //Assert  
             Assert.IsType<OkObjectResult>(data);

@@ -2,10 +2,6 @@
 using Logiwa_CaseStudy.Models;
 using Logiwa_CaseStudy.Services;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 
 namespace Logiwa_CaseStudy.Controllers
@@ -23,7 +19,7 @@ namespace Logiwa_CaseStudy.Controllers
             _mapper = mapper;
             
         }
-        // GET: api/<CategoryController>
+
         [HttpGet]
         public IActionResult Get()
         {
@@ -31,7 +27,7 @@ namespace Logiwa_CaseStudy.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(CreateCategory model)
+        public IActionResult Create(CreateCategoryDto model)
         {
             _categoryService.Create(model);
             return Ok(new { mesage = "Category created." });
@@ -39,7 +35,7 @@ namespace Logiwa_CaseStudy.Controllers
 
         [HttpPut]
         /// Update function w HttpPut
-        public IActionResult Update(int id, CreateCategory model)
+        public IActionResult Update(int id, CreateCategoryDto model)
         {
             _categoryService.Update(id, model);
             return Ok(new { message = "Category updated." });
