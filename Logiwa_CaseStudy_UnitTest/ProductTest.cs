@@ -98,7 +98,7 @@ namespace Logiwa_CaseStudy_UnitTest
         }
 
         [Fact]
-        public void Task_SearchByStockRangeProducts_Return_OkResult()
+        public async void Task_SearchByStockRangeProducts_Return_OkResult()
         {
 
             var mockRepo = new Mock<IProductService>();
@@ -107,23 +107,23 @@ namespace Logiwa_CaseStudy_UnitTest
             var mockController = new ProductController(mockRepo.Object, mapper);
 
             //Act  
-            var data = mockController.GetByQuantity();
+            var data = await mockController.GetByQuantity();
 
             //Assert  
             Assert.IsType<OkObjectResult>(data);
         }
 
         [Fact]
-        public void Task_SearchByCriteria_Return_OkResult()
+        public async void Task_SearchByCriteria_Return_OkResult()
         {
 
             var mockRepo = new Mock<IProductService>();
-            mockRepo.Setup(repo => repo.SearchByCriteriaAsync("a", "a", "e"));
+            mockRepo.Setup(repo => repo.SearchByCriteria("a", "a", "e"));
 
             var mockController = new ProductController(mockRepo.Object, mapper);
 
             //Act  
-            var data = mockController.GetByCriteria();
+            var data = await mockController.GetByCriteria();
 
             //Assert  
             Assert.IsType<OkObjectResult>(data);
@@ -137,14 +137,14 @@ namespace Logiwa_CaseStudy_UnitTest
 
 
         [Fact]
-        public void Task_SearchByStockRangeProducts_Return_EqualCount()
+        public async Task Task_SearchByStockRangeProducts_Return_EqualCountAsync()
         {
 
             var mockRepo = new Mock<IProductService>();
-            mockRepo.Setup(repo => repo.SearchByStockRange(30, 50)).Returns(products);
+            mockRepo.Setup(repo => repo.SearchByStockRange(30, 50)).ReturnsAsync(products);
 
             var mockController = new ProductController(mockRepo.Object, mapper);
-            var OkResult = Assert.IsType<OkObjectResult>(mockController.GetByQuantity(30, 50));
+            var OkResult = Assert.IsType<OkObjectResult>(await mockController.GetByQuantity(30, 50));
             //Act  
             var returnProducts = Assert.IsAssignableFrom<List<Product>>(OkResult.Value);
             var countSize = returnProducts.ToList().Count;
@@ -154,14 +154,14 @@ namespace Logiwa_CaseStudy_UnitTest
         }
 
         [Fact]
-        public void Task_SearchByCriteria_Return_EqualCount()
+        public async void Task_SearchByCriteria_Return_EqualCount()
         {
 
             var mockRepo = new Mock<IProductService>();
-            mockRepo.Setup(repo => repo.SearchByCriteriaAsync("a", "a", "e")).Returns(products);
+            mockRepo.Setup(repo => repo.SearchByCriteria("a", "a", "e")).ReturnsAsync(products);
 
             var mockController = new ProductController(mockRepo.Object, mapper);
-            var OkResult = Assert.IsType<OkObjectResult>(mockController.GetByCriteria("a", "a", "e"));
+            var OkResult = Assert.IsType<OkObjectResult>(await mockController.GetByCriteria("a", "a", "e"));
             //Act  
             var returnProducts = Assert.IsAssignableFrom<List<Product>>(OkResult.Value);
             var countSize = returnProducts.ToList().Count;
