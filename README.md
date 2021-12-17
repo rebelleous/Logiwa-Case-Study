@@ -70,5 +70,5 @@ Done? | To Do | Date
 ✅| SQL Server (DB Change) | 15.12.2021
 ✅| Docker Deployment | 15.12.2021
 ✅| Unit Test | 16.12.2021
-⬜️| Redis DB | 
+✅| Redis Cache | 17.12.2021
 ⬜️| Generic Repository | 
