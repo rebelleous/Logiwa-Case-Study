@@ -12,12 +12,10 @@ namespace Logiwa_CaseStudy.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IProductService _productService;
-        private IMapper _mapper;
 
-        public ProductController(IProductService productService, IMapper mapper)
+        public ProductController(IProductService productService)
         {
             _productService = productService;
-            _mapper = mapper;
         }
 
               

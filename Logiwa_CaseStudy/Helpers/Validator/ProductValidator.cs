@@ -19,7 +19,7 @@ namespace Logiwa_CaseStudy.Models.Validator
             RuleFor(x => x).Must(x => IsCategoryExist(x.CategoryID)).WithMessage(x => $"{x.CategoryID} numbered ID does not have category."); 
 
             RuleFor(x => x) 
-                .Must(x=> FindCategoryMinQuantity(CategoryID:x.CategoryID,quantity:x.StockQuantity))
+                .Must(x=> FindCategoryMinQuantity(x.CategoryID,x.StockQuantity))
                 .WithMessage(m => $"Product's Stock Quantity is less than Category's Minimum Stock Quantity."); 
             
 

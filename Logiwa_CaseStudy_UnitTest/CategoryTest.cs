@@ -21,10 +21,7 @@ namespace Logiwa_CaseStudy_UnitTest
                         new Category(){Name="Elektronik",MinStockQuantity=5},
 
             };
-        static Mapping myProfile = new Mapping();
-        static MapperConfiguration configuration = new MapperConfiguration(cfg => cfg.AddProfile(myProfile));
-        IMapper mapper = new Mapper(configuration);
-
+        
         #endregion
 
         #region OkResult Testleri
@@ -35,7 +32,7 @@ namespace Logiwa_CaseStudy_UnitTest
             var mockRepo = new Mock<ICategoryService>();
             mockRepo.Setup(repo => repo.ListAllCategories());
 
-            var mockController = new CategoryController(mockRepo.Object, mapper);
+            var mockController = new CategoryController(mockRepo.Object);
 
             //Act  
             var data = mockController.Get();
@@ -51,7 +48,7 @@ namespace Logiwa_CaseStudy_UnitTest
             var mockRepo = new Mock<ICategoryService>();
             mockRepo.Setup(repo => repo.Create(new CreateCategoryDto()));
 
-            var mockController = new CategoryController(mockRepo.Object, mapper);
+            var mockController = new CategoryController(mockRepo.Object);
 
             //Act  
             var data = mockController.Create(new CreateCategoryDto());
@@ -67,7 +64,7 @@ namespace Logiwa_CaseStudy_UnitTest
             var mockRepo = new Mock<ICategoryService>();
             mockRepo.Setup(repo => repo.Update(1, new CreateCategoryDto()));
 
-            var mockController = new CategoryController(mockRepo.Object, mapper);
+            var mockController = new CategoryController(mockRepo.Object);
 
             //Act  
             var data = mockController.Update(1, new CreateCategoryDto());
@@ -83,7 +80,7 @@ namespace Logiwa_CaseStudy_UnitTest
             var mockRepo = new Mock<ICategoryService>();
             mockRepo.Setup(repo => repo.Delete(1));
 
-            var mockController = new CategoryController(mockRepo.Object, mapper);
+            var mockController = new CategoryController(mockRepo.Object);
 
             //Act  
             var data = mockController.Delete(1);
@@ -101,7 +98,7 @@ namespace Logiwa_CaseStudy_UnitTest
             var mockRepo = new Mock<ICategoryService>();
             mockRepo.Setup(repo => repo.ListAllCategories()).Returns(categories);
 
-            var mockController = new CategoryController(mockRepo.Object, mapper);
+            var mockController = new CategoryController(mockRepo.Object);
             var OkResult = Assert.IsType<OkObjectResult>(mockController.Get());
             //Act  
             var returnCategories = Assert.IsAssignableFrom<List<Category>>(OkResult.Value);

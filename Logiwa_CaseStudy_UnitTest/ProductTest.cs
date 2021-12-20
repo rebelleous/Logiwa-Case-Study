@@ -21,11 +21,11 @@ namespace Logiwa_CaseStudy_UnitTest
         List<Product> products = new List<Product>
             {
                         new Product() {Description="Karşınızda şimdiye kadarki en hızlı ve en güçlü Xbox olan Xbox Series X.",StockQuantity=40,CategoryID=1,Title="Microsoft Xbox Series X Oyun Konsolu Siyah 1 TB"},
-
             };
-        static Mapping myProfile = new Mapping();
-        static MapperConfiguration configuration = new MapperConfiguration(cfg => cfg.AddProfile(myProfile));
-        IMapper mapper = new Mapper(configuration);
+        List<GetProductDto> productsDto = new List<GetProductDto>
+            {
+                        new GetProductDto() {Description="Karşınızda şimdiye kadarki en hızlı ve en güçlü Xbox olan Xbox Series X.",StockQuantity=40,CategoryID=1,Title="Microsoft Xbox Series X Oyun Konsolu Siyah 1 TB"},
+            };
 
         #endregion
 
@@ -38,7 +38,7 @@ namespace Logiwa_CaseStudy_UnitTest
             var mockRepo = new Mock<IProductService>();
             mockRepo.Setup(repo => repo.ListAllProducts());
 
-            var mockController = new ProductController(mockRepo.Object, mapper);
+            var mockController = new ProductController(mockRepo.Object);
 
             //Act  
             var data = mockController.Get();
@@ -54,7 +54,7 @@ namespace Logiwa_CaseStudy_UnitTest
             var mockRepo = new Mock<IProductService>();
             mockRepo.Setup(repo => repo.Create(new CreateUpdateProductDto()));
 
-            var mockController = new ProductController(mockRepo.Object, mapper);
+            var mockController = new ProductController(mockRepo.Object);
 
             //Act  
             var data = mockController.Create(new CreateUpdateProductDto());
@@ -70,7 +70,7 @@ namespace Logiwa_CaseStudy_UnitTest
             var mockRepo = new Mock<IProductService>();
             mockRepo.Setup(repo => repo.Update(1, new CreateUpdateProductDto()));
 
-            var mockController = new ProductController(mockRepo.Object, mapper);
+            var mockController = new ProductController(mockRepo.Object);
 
             //Act  
             var data = mockController.Update(1, new CreateUpdateProductDto());
@@ -86,7 +86,7 @@ namespace Logiwa_CaseStudy_UnitTest
             var mockRepo = new Mock<IProductService>();
             mockRepo.Setup(repo => repo.Delete(1));
 
-            var mockController = new ProductController(mockRepo.Object, mapper);
+            var mockController = new ProductController(mockRepo.Object);
 
             //Act  
             var data = mockController.Delete(1);
@@ -102,7 +102,7 @@ namespace Logiwa_CaseStudy_UnitTest
             var mockRepo = new Mock<IProductService>();
             mockRepo.Setup(repo => repo.SearchByStockRange(1, 200));
 
-            var mockController = new ProductController(mockRepo.Object, mapper);
+            var mockController = new ProductController(mockRepo.Object);
 
             //Act  
             var data = await mockController.GetByQuantity();
@@ -118,7 +118,7 @@ namespace Logiwa_CaseStudy_UnitTest
             var mockRepo = new Mock<IProductService>();
             mockRepo.Setup(repo => repo.SearchByCriteria("a", "a", "e"));
 
-            var mockController = new ProductController(mockRepo.Object, mapper);
+            var mockController = new ProductController(mockRepo.Object);
 
             //Act  
             var data = await mockController.GetByCriteria();
@@ -141,7 +141,7 @@ namespace Logiwa_CaseStudy_UnitTest
             var mockRepo = new Mock<IProductService>();
             mockRepo.Setup(repo => repo.SearchByStockRange(30, 50)).ReturnsAsync(products);
 
-            var mockController = new ProductController(mockRepo.Object, mapper);
+            var mockController = new ProductController(mockRepo.Object);
             var OkResult = Assert.IsType<OkObjectResult>(await mockController.GetByQuantity(30, 50));
             //Act  
             var returnProducts = Assert.IsAssignableFrom<List<Product>>(OkResult.Value);
@@ -158,7 +158,7 @@ namespace Logiwa_CaseStudy_UnitTest
             var mockRepo = new Mock<IProductService>();
             mockRepo.Setup(repo => repo.SearchByCriteria("a", "a", "e")).ReturnsAsync(products);
 
-            var mockController = new ProductController(mockRepo.Object, mapper);
+            var mockController = new ProductController(mockRepo.Object);
             var OkResult = Assert.IsType<OkObjectResult>(await mockController.GetByCriteria("a", "a", "e"));
             //Act  
             var returnProducts = Assert.IsAssignableFrom<List<Product>>(OkResult.Value);
@@ -173,9 +173,9 @@ namespace Logiwa_CaseStudy_UnitTest
         {
 
             var mockRepo = new Mock<IProductService>();
-            mockRepo.Setup(repo => repo.ListAllProducts()).Returns(mapper.Map<List<GetProductDto>>(products));
+            mockRepo.Setup(repo => repo.ListAllProducts()).Returns(productsDto);
 
-            var mockController = new ProductController(mockRepo.Object, mapper);
+            var mockController = new ProductController(mockRepo.Object);
             var OkResult = Assert.IsType<OkObjectResult>(mockController.Get());
             //Act  
             var returnProducts = Assert.IsAssignableFrom<List<GetProductDto>>(OkResult.Value);
