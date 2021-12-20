@@ -16,11 +16,12 @@ namespace Logiwa_CaseStudy.Models.Validator
             _context = context;
             RuleFor(x => x.Title).NotEmpty().WithMessage("Title can not be empty.").NotNull().WithMessage("Title can not be null.").MaximumLength(200); 
 
-            RuleFor(x => x).Must(x => IsCategoryExist(x.CategoryID)).WithMessage(x => $"{x.CategoryID} numbered ID does not have category."); 
+            RuleFor(x => x).Must(x => IsCategoryExist(x.CategoryID)).WithMessage(x => $"{x.CategoryID} numbered ID does not have category.");
+
 
             RuleFor(x => x) 
-                .Must(x=> FindCategoryMinQuantity(x.CategoryID,x.StockQuantity))
-                .WithMessage(m => $"Product's Stock Quantity is less than Category's Minimum Stock Quantity."); 
+                .Must(x=> FindCategoryMinQuantity(x.CategoryID,x.StockQuantity) =="1")
+                .WithMessage(m => FindCategoryMinQuantity(m.CategoryID, m.StockQuantity)); 
             
 
             bool IsCategoryExist(int CategoryID)
@@ -41,7 +42,7 @@ namespace Logiwa_CaseStudy.Models.Validator
                 }
             }
 
-            bool FindCategoryMinQuantity(int CategoryID, int quantity)
+            string FindCategoryMinQuantity(int CategoryID, int quantity)
             {
                 try
                 {
@@ -51,15 +52,15 @@ namespace Logiwa_CaseStudy.Models.Validator
                     {
                         if (quantity >= category.MinStockQuantity)
                         {
-                            return true;
+                            return 1.ToString();
                         }
-                        return false;
+                        return $"Product's Stock Quantity is less than Category's Minimum Stock Quantity. Category want {category.MinStockQuantity}";
                     }
-                    return false;
+                    return "Category is not exists";
                 }
                 catch (Exception)
                 {
-                    return false;
+                    return "Category is not exists";
                 }
             }
 
